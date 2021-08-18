@@ -54,6 +54,7 @@ public class MyQueue {
     }
 }
 
+//  该队列存在BUG：非环形队列，取完所有值后，无法再新增数值。
 class ArrayQueue {
 //    最大容量
     private int maxCapacity;
