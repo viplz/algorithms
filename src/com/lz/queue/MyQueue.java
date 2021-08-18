@@ -1,7 +1,57 @@
 package com.lz.queue;
 
+import java.util.Scanner;
+
 public class MyQueue {
 
+    public static void main(String[] args) {
+        ArrayQueue queue = new ArrayQueue(3);
+//        接收用户输入
+        char key = ' ';
+        Scanner in = new Scanner(System.in);
+        boolean loop = true;
+        while (loop) {
+            System.out.println("show(显示队列)");
+            System.out.println("add(添加队列)");
+            System.out.println("exit(退出程序)");
+            System.out.println("get(取队列)");
+            System.out.println("head(查看队列头)");
+//            接收一个字母
+            key = in.next().charAt(0);
+            switch (key){
+                case 's':
+                    queue.show();
+                    break;
+                case 'a':
+                    System.out.println("请输入一个需要入队的数：");
+                    int num = in.nextInt();
+                    queue.add(num);
+                    break;
+                case 'g':
+                    try {
+                        int res = queue.get();
+                        System.out.printf("取出的数据为：%d\n", res);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 'h':
+                    try {
+                        int res = queue.getHead();
+                        System.out.printf("取出的头部数据为：%d\n", res);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 'e':
+                    in.close();
+                    loop = false;
+                    break;
+            }
+        }
+
+        System.out.println("程序退出！");
+    }
 }
 
 class ArrayQueue {
@@ -33,7 +83,7 @@ class ArrayQueue {
         return rear == front;
     }
 
-    public void push(int n) {
+    public void add(int n) {
         if (isFull()) {
             System.out.println("队列已满，存值失败！");
             return;
@@ -43,7 +93,7 @@ class ArrayQueue {
         data[rear] = n;
     }
 
-    public int poll() throws Exception {
+    public int get() throws Exception {
         if (isEmpty()) {
             throw new RuntimeException("队列为空,取值失败！");
         }
@@ -52,17 +102,17 @@ class ArrayQueue {
         return data[front];
     }
 
-    public void foreach() {
+    public void show() {
         if (isEmpty()) {
             System.out.println("队列为空，遍历失败！");
             return;
         }
         for (int i = 0; i < data.length; i++) {
-            System.out.printf("queue[%d] = %d \n", data[i]);
+            System.out.printf("queue[%d] = %d \n", i, data[i]);
         }
     }
 
-    public int showHead() {
+    public int getHead()  throws Exception {
         if (isEmpty()) {
             throw new RuntimeException("队列为空，查询失败！");
         }
