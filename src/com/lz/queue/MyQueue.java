@@ -11,11 +11,11 @@ public class MyQueue {
         Scanner in = new Scanner(System.in);
         boolean loop = true;
         while (loop) {
-            System.out.println("show(显示队列)");
-            System.out.println("add(添加队列)");
-            System.out.println("exit(退出程序)");
-            System.out.println("get(取队列)");
-            System.out.println("head(查看队列头)");
+            System.out.println("s[show-显示队列]");
+            System.out.println("a[add-添加队列]");
+            System.out.println("e[exit-退出程序]");
+            System.out.println("g[get-取队列])");
+            System.out.println("h[head-查看队列头部]");
 //            接收一个字母
             key = in.next().charAt(0);
             switch (key){
