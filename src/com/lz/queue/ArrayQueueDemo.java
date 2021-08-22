@@ -2,7 +2,7 @@ package com.lz.queue;
 
 import java.util.Scanner;
 
-public class MyQueue {
+public class ArrayQueueDemo {
 
     public static void main(String[] args) {
         ArrayQueue queue = new ArrayQueue(3);
@@ -49,7 +49,6 @@ public class MyQueue {
                     break;
             }
         }
-
         System.out.println("程序退出！");
     }
 }
