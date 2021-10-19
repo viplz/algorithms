@@ -30,6 +30,10 @@ public class LinkedListDemo {
         System.out.println("----------顺序新增节点如下：");
         linkedList.list();
 
+        linkedList.delete(5);
+        System.out.println("----------删除节点后情况如下：");
+        linkedList.list();
+
     }
 }
 
@@ -94,6 +98,30 @@ class SingleLinkedList {
         if (flag){
             temp.name = node.name;
             temp.alias = node.alias;
+        }
+    }
+
+    //删除节点
+    public void delete(int no) {
+        if (head.next == null) {
+            System.out.println("链表为空，无需删除");
+        }
+        boolean isFind = false;
+        HeroNode temp = head;
+        while(temp != null) {
+            if (temp.next == null) {
+                break;
+            }
+            if (temp.next.no == no) {
+                isFind = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (isFind) {
+            temp.next = temp.next.next;
+        } else {
+            System.out.println("未匹配到待删除节点，无法删除！");
         }
     }
 
