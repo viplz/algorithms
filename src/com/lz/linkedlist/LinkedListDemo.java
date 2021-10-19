@@ -45,17 +45,17 @@ class SingleLinkedList {
     //添加节点
     public void add(HeroNode node) {
         HeroNode temp = head;
-        while (true) {
-            if (temp.getNext() == null) {
-                break;
-            }
-            temp = temp.getNext();
+        while (temp.next != null) {
+            temp = temp.next;
         }
-        temp.setNext(node);
+        temp.next = node;
     }
 
     //顺序添加节点
     public void addInOrder(HeroNode node) {
+        if (node == null || node.no == null) {
+            System.out.println("当前节点不存在，无法添加！");
+        }
         HeroNode temp = head;
         if (temp.next == null) {
             temp.next = node;
@@ -82,7 +82,7 @@ class SingleLinkedList {
     //更新节点
     public void update(HeroNode node) {
         if (node == null || node.no == null) {
-            System.out.printf("节点不存在，无法更新！");
+            System.out.println("节点不存在，无法更新！");
         }
         boolean flag = false;
         HeroNode temp = head.next;
@@ -120,9 +120,7 @@ class SingleLinkedList {
         }
         if (isFind) {
             temp.next = temp.next.next;
-        } else {
-            System.out.println("未匹配到待删除节点，无法删除！");
-        }
+        } else System.out.println("未匹配到待删除节点，无法删除！");
     }
 
     public void clear() {
@@ -131,17 +129,14 @@ class SingleLinkedList {
 
 //    遍历单链表
     public void list() {
-        if (head.getNext() == null) {
+        if (head.next == null) {
             System.out.println("链表为空！");
             return;
         }
         HeroNode temp = head;
-        while (true) {
-            if (temp.next == null) {
-                break;
-            }
+        while (temp.next != null) {
             temp = temp.next;
-            System.out.println(temp.toString());
+            System.out.println(temp);
         }
     }
 }
@@ -163,37 +158,6 @@ class HeroNode {
         this.alias = alias;
     }
 
-    public Integer getNo() {
-        return no;
-    }
-
-    public void setNo(Integer no) {
-        this.no = no;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public HeroNode getNext() {
-        return next;
-    }
-
-    public void setNext(HeroNode next) {
-        this.next = next;
-    }
 
     @Override
     public String toString() {
