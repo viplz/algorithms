@@ -37,7 +37,7 @@ public class DoubleLinkedListDemo {
     }
 }
 
-//单链表
+//双向链表
 class DoubleLinkedList {
     //  初始化头结点，确保节点不动，不存放具体数据
     private HeroNode2 head = new HeroNode2(0, "", "");
