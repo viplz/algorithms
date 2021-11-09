@@ -27,7 +27,7 @@ public class ArrayStackDemo {
                 case "pop" :
                     try {
                         Integer ele = stack.pop();
-                        System.out.printf("出栈的元素是%s", ele);
+                        System.out.printf("出栈的元素是%s\n", ele);
                     }catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
