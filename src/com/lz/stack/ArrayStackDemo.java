@@ -6,7 +6,7 @@ public class ArrayStackDemo {
     public static void main(String[] args) {
         ArrayStack<Integer> stack = new ArrayStack<>(5);
         String key = "";
-        boolean loop = false;
+        boolean loop = true;
         Scanner scanner = new Scanner(System.in);
         while (loop) {
             System.out.println("list————遍历栈");

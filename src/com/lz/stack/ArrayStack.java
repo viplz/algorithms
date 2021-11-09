@@ -18,6 +18,7 @@ public class ArrayStack <T> {
 //  私有化无参构造
     private ArrayStack(){}
 //  初始化栈
+    @SuppressWarnings("unchecked")
     public ArrayStack(int maxSize) {
         this.maxSize = maxSize;
         this.stack = (T[]) new Object[this.maxSize];
@@ -36,9 +37,11 @@ public class ArrayStack <T> {
 //  入栈
     public void push(T ele){
         if (isFull()) {
+            System.out.println("栈满，无法入栈！");
             return;
         }
-        this.stack[topPos++] = ele;
+        topPos++;
+        this.stack[topPos] = ele;
     }
 
 //  出栈
@@ -57,7 +60,7 @@ public class ArrayStack <T> {
             return;
         }
         for (int i = topPos; i >=0 ; i--) {
-            System.out.printf("stack[%d]=%s", i, stack[i]!=null ? stack[i].toString() : null);
+            System.out.printf("stack[%d]=%s \n", i, stack[i]!=null ? stack[i].toString() : null);
         }
     }
 }
