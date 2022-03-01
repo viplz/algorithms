@@ -4,6 +4,7 @@ import java.util.*;
 
 public class UnitTest {
 
+    public static final Set<Character> VOWELS = new HashSet<>(Arrays.asList('a','e','i','o','u','A','E','I','O','U'));
 
     /**
      * 'a', 'a', 'b', 'b'
@@ -16,7 +17,7 @@ public class UnitTest {
 //        System.out.println(new UnitTest().compressString("aabcccccaaa"));
 //        int[][] aa = new int[][]{{0, 1, 1, 2}, {3, 4, 6, 5}, {1, 8, 0, 1}};
 //        new UnitTest().setZeroes(aa);
-        ListNode a = new ListNode(2);
+        /*ListNode a = new ListNode(2);
         ListNode b = new ListNode(4);
         ListNode c = new ListNode(3);
         ListNode d = new ListNode(5);
@@ -38,7 +39,7 @@ public class UnitTest {
         b2.next = c2;
         c2.next = d2;
         d2.next = e2;
-        e2.next = f2;
+        e2.next = f2;*/
 
 
 //        ListNode{val=3, next=ListNode{val=6, next=ListNode{val=6, next=ListNode{val=8, next=ListNode{val=6, next=ListNode{val=2, next=ListNode{val=0, next=null}}}}}}}
@@ -47,7 +48,10 @@ public class UnitTest {
 //        145342    123321  268663
 
 //        System.out.println(partition(a, 2).toString());
-        System.out.println(addTwoNumbers(a, a2));
+//        System.out.println(addTwoNumbers(a, a2));
+//        System.out.println(reverseVowels("hello"));
+//        System.out.println(validPalindrome("abc"));
+        merge(new int[]{1,2,3,0,0,0}, 3, new int[]{2,5,6}, 3);
     }
 
 
@@ -383,8 +387,116 @@ public class UnitTest {
             prev = prev.next;
         }
         return true;
-
     }
+
+    public int[] twoSum(int[] numbers, int target) {
+        if (numbers == null) return null;
+        int len = numbers.length;
+        int head = 0, tail = len-1;
+        int sum = 0;
+        while ( head < tail) {
+            sum = numbers[head] + numbers[tail];
+            if (sum == target) {
+                return new int[]{++head, ++tail};
+            } else if (sum > target) {
+                tail--;
+            } else {
+                head++;
+            }
+        }
+        return null;
+    }
+
+    public boolean judgeSquareSum(int c) {
+        if (c == 0) return true;
+
+        long head = 0, tail = (long) Math.sqrt(c), sum = 0;
+
+        while (head <= tail) {
+            sum = head * head + tail * tail;
+            if (sum == c) {
+                return true;
+            } else if (sum < c) {
+                head++;
+            } else {
+                tail--;
+            }
+        }
+        return false;
+    }
+
+
+    public static String reverseVowels(String s) {
+        if (s==null) return null;
+        int head = 0, tail = s.length()-1;
+        char[] res = new char[s.length()];
+        char headChar, tailChar;
+         while (head <= tail) {
+
+            headChar = s.charAt(head);
+            tailChar = s.charAt(tail);
+
+            if (!VOWELS.contains(headChar)) {
+                res[head++] = headChar;
+            } else if (!VOWELS.contains(tailChar)) {
+                res[tail--] = tailChar;
+            } else {
+                res[head++] = tailChar;
+                res[tail--] = headChar;
+            }
+        }
+        return new String(res);
+    }
+
+    public static boolean validPalindrome(String s) {
+        if (s == null) return false;
+        for (int h = 0, t = s.length(); h < t; h++, t--) {
+            if (s.charAt(h) != s.charAt(t)) {
+                return isPalindrome(s, h+1, t) || isPalindrome(s, h, t-1);
+            }
+        }
+        return false;
+    }
+
+    private static boolean isPalindrome(String s, int h, int t) {
+        while (h < t) {
+            if (s.charAt(h++) != s.charAt(t--)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int total = m+n-1, tail1 = m-1, tail2 = n-1;
+        for (int i = total; i >= 0; i--) {
+            if (tail2 == -1) {
+                nums1[i] = nums1[tail1--];
+            }else if (tail1 == -1) {
+                nums1[i] = nums2[tail2--];
+            } else if (nums1[tail1] <= nums2[tail2]) {
+                nums1[i] = nums2[tail2--];
+            } else {
+                nums1[i] = nums1[tail1--];
+            }
+        }
+    }
+
+    public boolean hasCycle(ListNode head) {
+        if (head == null) return false;
+
+        ListNode slow = head, fast = head.next;
+
+        while (slow != null && fast != null && fast.next != null)
+        {
+            if (slow == fast) return true;
+
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return false;
+    }
+
 }
 
 class ListNode {

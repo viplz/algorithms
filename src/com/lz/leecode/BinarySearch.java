@@ -1,27 +1,26 @@
 package com.lz.leecode;
 
+/**
+ * @author lian-zhang
+ * @version 1.0
+ * @ClassName BinarySearch.java
+ * @Description TODO
+ * @createTime 2022年01月11日 00:24:40
+ */
 public class BinarySearch {
-
-    private int v1 = 10;
-    private final int v2 = 12;
-    private static final int v3 = 12;
-
     public int search(int[] nums, int target) {
-        int left=0, right=nums.length-1;
-        while (left <= right) {
-            int mid = (left + right) / 2;
+        int low = 0, high = nums.length - 1;
+        while (low <= high) {
+            int mid = (high - low) / 2 + low;
             int num = nums[mid];
             if (num == target) {
                 return mid;
             } else if (num > target) {
-                right = mid - 1;
+                high = mid - 1;
             } else {
-                left = mid + 1;
+                low = mid + 1;
             }
         }
         return -1;
-    }
-
-    public static void main(String[] args) {
     }
 }
